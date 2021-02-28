@@ -1,10 +1,25 @@
+<?xml version="1.0"?>
 <launch>
-  <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
-  <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>
-  <param name="serial_baudrate"     type="int"    value="115200"/><!--A1/A2 -->
-  <!--param name="serial_baudrate"     type="int"    value="256000"--><!--A3 -->
-  <param name="frame_id"            type="string" value="laser"/>
-  <param name="inverted"            type="bool"   value="false"/>
-  <param name="angle_compensate"    type="bool"   value="true"/>
-  </node>
+
+  <arg name="ns"          default="rplidar"/>
+  <arg name="lidar_name"  default="rplidar"/>
+
+  <group ns="$(arg ns)">
+  
+    <!-- Launch the RPLidar node -->
+    <node name="rplidarNode" pkg="rplidar_ros"  type="rplidarNode" output="screen">
+      <!-- arg name="use_gdb" default="false"/ -->
+      <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>
+      <param name="serial_baudrate"     type="int"    value="115200"/><!--A1/A2, 256000 for A3-->
+      <param name="frame_id"            type="string" value="laser_frame"/>
+      <param name="inverted"            type="bool"   value="false"/>
+      <param name="angle_compensate"    type="bool"   value="true"/>
+    </node>
+  </group>
+  
+  <!-- Publish tf -->
+  <!-- param name="robot_description" command="$(find xacro)/xacro '$(find rplidar_ros)/urdf/$(arg lidar_name).urdf.xacro'"/>
+  <node name="$(arg lidar_name)_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="tf_prefix" value=""/>
+  </node -->
 </launch>
