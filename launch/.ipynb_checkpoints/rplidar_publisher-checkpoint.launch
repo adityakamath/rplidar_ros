@@ -18,8 +18,8 @@
   </group>
   
   <!-- Publish tf -->
-  <!-- param name="robot_description" command="$(find xacro)/xacro '$(find rplidar_ros)/urdf/$(arg lidar_name).urdf.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro '$(find rplidar_ros)/urdf/$(arg lidar_name).urdf.xacro'"/>
   <node name="$(arg lidar_name)_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
     <param name="tf_prefix" value=""/>
-  </node -->
+  </node>
 </launch>
